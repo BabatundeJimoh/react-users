@@ -1,24 +1,37 @@
 import React from "react";
 import { Card, Col } from "react-bootstrap";
+import { useSelector } from "react-redux";
 
-const User = (props) => {
+export default function User() {
+  const state = useSelector((state) => {
+    return state.usersReducer;
+  });
+  console.log(state, "hu");
+
   return (
-    <Col md="3" style={{ color: "white" }}>
-      <Card style={{ width: "13rem", backgroundColor: "orange" }}>
-        <Card.Body>
-          <Card.Title>REGISTRATION</Card.Title>
-          <Card.Subtitle className="mb-2 text-muted">User Info</Card.Subtitle>
-          <Card.Text>
-            <p>Name: {props.userInfo.name}</p>
-            <p>Email:{props.userInfo.email}</p>
-            <p>Gen: {props.userInfo.gen}</p>
-          </Card.Text>
-          <Card.Link href="#">Edit</Card.Link>
-          <Card.Link href="#">Delete</Card.Link>
-        </Card.Body>
-      </Card>
-    </Col>
+    <div>
+      {state.users.map((user) => {
+        return (
+          <div>
+            <Col md="3" style={{ color: "white" }}>
+              <Card style={{ width: "13rem", backgroundColor: "orange" }}>
+                <Card.Body>
+                  <Card.Title>REGISTRATION</Card.Title>
+                  <Card.Subtitle className="mb-2 text-muted">
+                    User Info
+                  </Card.Subtitle>
+                  <Card.Text>
+                    <p>Name:{user.name}</p>
+                    <p>Email:{user.email} </p>
+                  </Card.Text>
+                  <Card.Link href="#">Edit</Card.Link>
+                  <Card.Link href="#">Delete</Card.Link>
+                </Card.Body>
+              </Card>
+            </Col>
+          </div>
+        );
+      })}
+    </div>
   );
-};
-
-export default User;
+}
